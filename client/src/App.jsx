@@ -1,30 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Landing from './pages/Landing';
 
-const App = () => {
-
-  const [array, setArray] = useState([])
-
-  // Fetch backend api
-  const fetchAPI = async () => {
-    const response = await axios.get('http://localhost:5000/users')
-    console.log(response.data.users)
-    setArray(response.data.users)
-  }
-
-  // Fetch API on component mount
-  useEffect(() => {
-    fetchAPI()
-  }, [])
+function App(){
   
-  return (
-    <div>
-      {array.map((user, index) => (
-        <div key={index}>
-          <h1>{user}</h1>
-        </div>
-      ))}
-    </div>
+  return(
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+      </Routes>
+    </Router>
   )
 }
 

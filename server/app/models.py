@@ -3,6 +3,7 @@ from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
 from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # User model
 class User(db.Model):
@@ -15,6 +16,10 @@ class User(db.Model):
     # String representation
     def __repr__(self) -> str:
         return f'<User {self.username}>'
+    
+    # Set password
+    def set_password(self, password: str) -> None:
+        self.password_hash = generate_password_hash(password)
     
 # Post model
 class Post(db.Model):
